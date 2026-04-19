@@ -4,428 +4,147 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Departamentos Mina Clavero</title>
-  <meta name="description" content="Dos departamentos premium en Mina Clavero. A 1 cuadra del río Los Elefantes. Todo incluido."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
-
   <style>
     :root {
-      --forest:   #5E6C5B;
-      --cream:    #F4EFE6;
-      --white:    #FEFCF6;
-      --sky:      #D6E0E2;
-      --storm:    #686867;
-      --midnight: #162A2C;
-      --gap: clamp(1.25rem, 5vw, 4rem);
+      --forest:#5E6C5B; --cream:#F4EFE6; --white:#FEFCF6;
+      --sky:#D6E0E2; --storm:#686867; --midnight:#162A2C;
+      --gap:clamp(1.25rem,5vw,4rem);
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Montserrat',sans-serif;font-weight:300;font-size:15px;background:var(--cream);color:var(--midnight);line-height:1.8;overflow-x:hidden;}
+    img{display:block;max-width:100%;}
+    a{color:inherit;text-decoration:none;}
+    h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:300;line-height:1.1;}
+    .label{font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--forest);}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 300;
-      font-size: 15px;
-      background: var(--cream);
-      color: var(--midnight);
-      line-height: 1.8;
-      overflow-x: hidden;
-    }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
-    h1, h2, h3, h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      line-height: 1.1;
-    }
-    .label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: var(--forest);
-    }
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem var(--gap);transition:background .4s;}
+    nav.scrolled{background:rgba(22,42,44,.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(214,224,226,.12);}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;letter-spacing:.1em;color:var(--white);}
+    .nav-links{display:flex;gap:2.5rem;font-size:10px;letter-spacing:.18em;text-transform:uppercase;}
+    .nav-links a{color:rgba(254,252,246,.7);transition:color .2s;}
+    .nav-links a:hover{color:var(--white);}
+    @media(max-width:580px){.nav-links{display:none;}}
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem var(--gap);
-      background: transparent;
-      transition: background .4s, border-color .4s;
-    }
-    nav.scrolled {
-      background: rgba(22,42,44,.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(214,224,226,.12);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem; letter-spacing: .1em; color: var(--white);
-    }
-    .nav-links { display: flex; gap: 2.5rem; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; }
-    .nav-links a { color: rgba(254,252,246,.7); transition: color .2s; }
-    .nav-links a:hover { color: var(--white); }
-    @media(max-width:580px){ .nav-links { display: none; } }
+    /* HERO */
+    .hero{position:relative;height:100svh;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
+    .hero-img{position:absolute;inset:0;background:url('https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/header.jpg') center/cover no-repeat;animation:heroZoom 18s ease-out both;}
+    .hero-img::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,#2a3d2e,#162A2C 55%,#3a4a3f);opacity:.35;}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(22,42,44,.05) 0%,rgba(22,42,44,.15) 40%,rgba(22,42,44,.65) 75%,rgba(22,42,44,.88) 100%);z-index:1;}
+    .hero-trees{position:absolute;bottom:0;left:0;right:0;z-index:2;pointer-events:none;}
+    .hero-trees svg{width:100%;height:auto;display:block;}
+    .hero-content{position:relative;z-index:3;padding:0 var(--gap) 5rem;max-width:900px;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.75rem;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--sky);margin-bottom:1.5rem;animation:fadeUp .9s ease both;}
+    .hero-eyebrow::before{content:'';display:block;width:2rem;height:1px;background:var(--sky);}
+    .hero h1{font-size:clamp(3.2rem,9vw,6.5rem);color:var(--white);margin-bottom:1.25rem;animation:fadeUp .9s .1s ease both;text-shadow:0 2px 32px rgba(22,42,44,.4);}
+    .hero h1 em{font-style:italic;color:var(--sky);}
+    .hero-sub{font-size:.88rem;color:rgba(254,252,246,.75);max-width:440px;line-height:2;margin-bottom:2.5rem;animation:fadeUp .9s .2s ease both;}
+    .hero-badges{display:flex;flex-wrap:wrap;gap:.5rem;animation:fadeUp .9s .3s ease both;}
+    .badge{font-size:9px;letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(214,224,226,.4);padding:.4rem 1rem;color:var(--sky);}
+    .hero-scroll-hint{position:absolute;bottom:1.75rem;right:var(--gap);z-index:3;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(214,224,226,.55);writing-mode:vertical-rl;display:flex;align-items:center;gap:.6rem;animation:fadeUp .9s .5s ease both;}
+    .hero-scroll-hint::after{content:'';display:block;width:1px;height:2.5rem;background:currentColor;}
 
-    /* ── HERO — full-screen image ── */
-    .hero {
-      position: relative;
-      height: 100svh;
-      min-height: 600px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      overflow: hidden;
-    }
-    .hero-img {
-      position: absolute; inset: 0;
-      /* 👉 REEMPLAZÁ 'hero.jpg' por el nombre de tu foto real */
-      background: url('hero.jpg') center/cover no-repeat;
-      transform-origin: center;
-      animation: heroZoom 18s ease-out both;
-    }
-    /* Fallback gradient mientras no hay foto propia */
-    .hero-img::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(160deg, #2a3d2e 0%, #162A2C 55%, #3a4a3f 100%);
-      opacity: 1;
-    }
-    /* Degradé oscuro en la parte inferior para que el texto sea legible */
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(22,42,44,.1) 0%,
-        rgba(22,42,44,.2) 40%,
-        rgba(22,42,44,.72) 75%,
-        rgba(22,42,44,.9) 100%
-      );
-      z-index: 1;
-    }
-    /* Silueta de pinos como en la referencia */
-    .hero-trees {
-      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
-      pointer-events: none;
-    }
-    .hero-trees svg { width: 100%; height: auto; display: block; }
+    /* SECTIONS */
+    .section{padding:5rem var(--gap);max-width:1140px;margin:0 auto;}
+    .section-head{margin-bottom:3.5rem;}
+    .section-head h2{font-size:clamp(2rem,5vw,3.5rem);margin-top:.6rem;}
+    .rule{width:2.5rem;height:1px;background:var(--forest);margin-top:1.5rem;}
 
-    .hero-content {
-      position: relative; z-index: 3;
-      padding: 0 var(--gap) 5rem;
-      max-width: 900px;
-    }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: .75rem;
-      font-size: 10px; letter-spacing: .26em; text-transform: uppercase;
-      color: var(--sky); margin-bottom: 1.5rem;
-      animation: fadeUp .9s ease both;
-    }
-    .hero-eyebrow::before {
-      content:''; display: block; width: 2rem; height: 1px; background: var(--sky);
-    }
-    .hero h1 {
-      font-size: clamp(3.2rem, 9vw, 6.5rem);
-      color: var(--white);
-      margin-bottom: 1.25rem;
-      animation: fadeUp .9s .1s ease both;
-      text-shadow: 0 2px 32px rgba(22,42,44,.4);
-    }
-    .hero h1 em { font-style: italic; color: var(--sky); }
-    .hero-sub {
-      font-size: .88rem; color: rgba(254,252,246,.75);
-      max-width: 440px; line-height: 2; margin-bottom: 2.5rem;
-      animation: fadeUp .9s .2s ease both;
-    }
-    .hero-badges {
-      display: flex; flex-wrap: wrap; gap: .5rem;
-      animation: fadeUp .9s .3s ease both;
-    }
-    .badge {
-      font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
-      border: 1px solid rgba(214,224,226,.4);
-      padding: .4rem 1rem; color: var(--sky);
-    }
-    .hero-scroll-hint {
-      position: absolute; bottom: 1.75rem; right: var(--gap); z-index: 3;
-      font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
-      color: rgba(214,224,226,.55);
-      writing-mode: vertical-rl;
-      display: flex; align-items: center; gap: .6rem;
-      animation: fadeUp .9s .5s ease both;
-    }
-    .hero-scroll-hint::after {
-      content:''; display: block; width: 1px; height: 2.5rem; background: currentColor;
-    }
+    /* CARDS */
+    .apts-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(94,108,91,.15);}
+    @media(max-width:700px){.apts-grid{grid-template-columns:1fr;}}
+    .apt-card{background:var(--white);overflow:hidden;}
 
-    /* ── WAVY SEPARATOR (como la referencia) ── */
-    .wave-sep {
-      display: block; width: 100%; overflow: hidden;
-      line-height: 0; background: var(--midnight);
-    }
-    .wave-sep svg { display: block; }
-    .wave-sep.to-cream { background: var(--midnight); }
-    .wave-sep.to-cream svg path { fill: var(--cream); }
-    .wave-sep.to-midnight { background: var(--cream); }
-    .wave-sep.to-midnight svg path { fill: var(--midnight); }
+    /* GALLERY */
+    .apt-gallery{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--midnight);}
+    .gallery-slides{display:flex;height:100%;transition:transform .6s cubic-bezier(.4,0,.2,1);}
+    .gallery-slides img{min-width:100%;height:100%;object-fit:cover;flex-shrink:0;}
+    .gallery-nav{position:absolute;bottom:1rem;right:1rem;display:flex;gap:.35rem;}
+    .gnav-btn{width:2rem;height:2rem;background:rgba(22,42,44,.55);color:#fff;border:none;font-size:.9rem;cursor:pointer;display:grid;place-items:center;transition:background .2s;}
+    .gnav-btn:hover{background:var(--midnight);}
+    .gallery-count{position:absolute;top:1rem;left:1rem;font-size:10px;letter-spacing:.1em;background:rgba(22,42,44,.5);color:#fff;padding:.3rem .75rem;}
+    .img-loading{position:absolute;inset:0;display:grid;place-items:center;color:rgba(214,224,226,.4);font-size:10px;letter-spacing:.1em;text-transform:uppercase;}
 
-    /* ── SECTION ── */
-    .section { padding: 5rem var(--gap); max-width: 1140px; margin: 0 auto; }
-    .section-head { margin-bottom: 3.5rem; }
-    .section-head h2 { font-size: clamp(2rem, 5vw, 3.5rem); margin-top: .6rem; }
-    .rule { width: 2.5rem; height: 1px; background: var(--forest); margin-top: 1.5rem; }
+    .apt-body{padding:2rem 2rem 2.5rem;}
+    .apt-style-tag{font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.75rem;}
+    .tag-nordic{color:var(--forest);}
+    .tag-industrial{color:var(--storm);}
+    .apt-name{font-size:clamp(1.6rem,3vw,2.2rem);color:var(--midnight);margin-bottom:.75rem;}
+    .apt-desc{font-size:.85rem;color:var(--storm);margin-bottom:1.5rem;max-width:340px;}
+    .apt-amenities{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem;}
+    .pill{font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(94,108,91,.3);padding:.3rem .85rem;color:var(--storm);}
 
-    /* ── CARDS DEPTO ── */
-    .apts-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: rgba(94,108,91,.15);
-    }
-    @media(max-width:700px){ .apts-grid { grid-template-columns: 1fr; } }
-    .apt-card { background: var(--white); overflow: hidden; }
+    /* WA BUTTON */
+    .wa-btn{display:inline-flex;align-items:center;gap:.6rem;background:var(--midnight);color:var(--white);font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.16em;text-transform:uppercase;padding:.85rem 1.75rem;transition:background .25s;cursor:pointer;border:none;}
+    .wa-btn:hover{background:#25d366;}
+    .wa-btn svg{width:16px;height:16px;fill:currentColor;flex-shrink:0;}
 
-    .apt-gallery { position: relative; aspect-ratio: 4/3; overflow: hidden; }
-    .gallery-slides { display: flex; height: 100%; transition: transform .6s cubic-bezier(.4,0,.2,1); }
-    .gallery-slides img { min-width: 100%; height: 100%; object-fit: cover; }
-    .gallery-nav { position: absolute; bottom: 1rem; right: 1rem; display: flex; gap: .35rem; }
-    .gnav-btn {
-      width: 2rem; height: 2rem;
-      background: rgba(22,42,44,.55); color: #fff; border: none;
-      font-size: .9rem; cursor: pointer; display: grid; place-items: center;
-      transition: background .2s;
-    }
-    .gnav-btn:hover { background: var(--midnight); }
-    .gallery-count {
-      position: absolute; top: 1rem; left: 1rem;
-      font-size: 10px; letter-spacing: .1em;
-      background: rgba(22,42,44,.5); color: #fff; padding: .3rem .75rem;
-    }
+    /* COMMON AREAS */
+    .common-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--midnight);}
 
-    .apt-body { padding: 2rem 2rem 2.5rem; }
-    .apt-style-tag { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem; }
-    .tag-nordic { color: var(--forest); }
-    .tag-industrial { color: var(--storm); }
-    .apt-name { font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--midnight); margin-bottom: .75rem; }
-    .apt-desc { font-size: .85rem; color: var(--storm); margin-bottom: 1.5rem; max-width: 340px; }
-    .apt-amenities { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 2rem; }
-    .pill {
-      font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
-      border: 1px solid rgba(94,108,91,.3); padding: .3rem .85rem; color: var(--storm);
-    }
-    .wa-btn {
-      display: inline-flex; align-items: center; gap: .6rem;
-      background: var(--midnight); color: var(--white);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
-      padding: .85rem 1.75rem; transition: background .25s;
-    }
-    .wa-btn:hover { background: var(--forest); }
-    .wa-btn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+    /* LOCATION */
+    .loc-section{background:var(--midnight);color:var(--cream);padding:6rem var(--gap);}
+    .loc-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+    @media(max-width:700px){.loc-inner{grid-template-columns:1fr;}}
+    .loc-section .label{color:var(--sky);}
+    .loc-section h2{color:var(--cream);font-size:clamp(2rem,5vw,3.2rem);margin-top:.6rem;margin-bottom:2.5rem;}
+    .loc-list{list-style:none;display:flex;flex-direction:column;}
+    .loc-item{display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:start;padding:1.25rem 0;border-bottom:1px solid rgba(214,224,226,.12);font-size:.87rem;line-height:1.7;}
+    .loc-item:first-child{border-top:1px solid rgba(214,224,226,.12);}
+    .loc-num{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--sky);opacity:.6;}
+    .loc-item strong{display:block;font-weight:500;color:var(--cream);margin-bottom:.15rem;}
+    .loc-item span{color:rgba(244,239,230,.5);}
+    .map-frame{overflow:hidden;aspect-ratio:1;}
+    .map-frame iframe{width:100%;height:100%;border:none;filter:grayscale(20%) contrast(1.05);}
 
-    /* ── UPLOAD FOTOS ── */
-    .upload-zone {
-      margin-top: 2px; background: var(--sky);
-      padding: 3rem var(--gap); text-align: center;
-    }
-    .upload-zone h3 { font-size: 1.5rem; color: var(--midnight); margin: .5rem 0 .4rem; }
-    .upload-zone p { font-size: .83rem; color: var(--storm); margin-bottom: 1.5rem; }
-    .upload-label {
-      display: inline-flex; align-items: center; gap: .5rem;
-      border: 1px solid var(--midnight); color: var(--midnight);
-      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
-      padding: .8rem 1.75rem; cursor: pointer; transition: background .2s, color .2s;
-    }
-    .upload-label:hover { background: var(--midnight); color: var(--white); }
-    #photoInput { display: none; }
-    .uploaded-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-      gap: 2px; margin-top: 1.5rem;
-    }
-    .uploaded-grid img { aspect-ratio: 1; object-fit: cover; width: 100%; }
+    /* JOURNEY BANNER */
+    .journey-banner{position:relative;background:var(--midnight);padding:6rem var(--gap);text-align:center;overflow:hidden;}
+    .journey-banner-bg{position:absolute;inset:0;background:url('https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/header.jpg') center/cover no-repeat;opacity:.2;}
+    .journey-trees{position:absolute;bottom:0;left:0;right:0;pointer-events:none;}
+    .journey-trees svg{display:block;width:100%;}
+    .journey-content{position:relative;z-index:2;}
+    .journey-banner h2{font-size:clamp(2.2rem,6vw,4.5rem);color:var(--white);letter-spacing:.04em;text-transform:uppercase;margin-bottom:1.25rem;}
+    .journey-banner p{color:rgba(254,252,246,.65);font-size:.88rem;max-width:480px;margin:0 auto 2.5rem;line-height:2;}
+    .btn-journey{display:inline-flex;align-items:center;gap:.6rem;background:#25d366;color:var(--white);font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:1rem 2.5rem;transition:background .25s;}
+    .btn-journey:hover{background:#1da851;}
+    .btn-journey svg{width:16px;height:16px;fill:currentColor;}
 
-    /* ── LOCATION — dark section ── */
-    .loc-section {
-      background: var(--midnight);
-      color: var(--cream);
-      padding: 6rem var(--gap);
-    }
-    .loc-inner {
-      max-width: 1140px; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: start;
-    }
-    @media(max-width:700px){ .loc-inner { grid-template-columns: 1fr; } }
-    .loc-section .label { color: var(--sky); }
-    .loc-section h2 {
-      color: var(--cream);
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      margin-top: .6rem; margin-bottom: 2.5rem;
-    }
-    .loc-list { list-style: none; display: flex; flex-direction: column; }
-    .loc-item {
-      display: grid; grid-template-columns: auto 1fr;
-      gap: 1.25rem; align-items: start;
-      padding: 1.25rem 0;
-      border-bottom: 1px solid rgba(214,224,226,.12);
-      font-size: .87rem; line-height: 1.7;
-    }
-    .loc-item:first-child { border-top: 1px solid rgba(214,224,226,.12); }
-    .loc-num { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--sky); opacity: .6; }
-    .loc-item strong { display: block; font-weight: 500; color: var(--cream); margin-bottom: .15rem; }
-    .loc-item span { color: rgba(244,239,230,.5); }
-    .map-frame { overflow: hidden; aspect-ratio: 1; }
-    .map-frame iframe { width: 100%; height: 100%; border: none; filter: grayscale(20%) contrast(1.05); }
+    /* TIPS */
+    .tips-section{padding:6rem var(--gap);max-width:1140px;margin:0 auto;}
+    .tips-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;}
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px;background:rgba(94,108,91,.15);}
+    .blog-card{background:var(--white);overflow:hidden;transition:transform .3s;}
+    .blog-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(22,42,44,.08);}
+    .blog-card img{aspect-ratio:16/9;object-fit:cover;width:100%;}
+    .blog-body{padding:1.5rem 1.75rem 2rem;}
+    .blog-cat{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--forest);margin-bottom:.6rem;}
+    .blog-title{font-size:1.3rem;color:var(--midnight);margin-bottom:.5rem;}
+    .blog-excerpt{font-size:.82rem;color:var(--storm);}
 
-    /* ── START YOUR JOURNEY BANNER (como referencia) ── */
-    .journey-banner {
-      position: relative;
-      background: var(--midnight);
-      padding: 6rem var(--gap);
-      text-align: center;
-      overflow: hidden;
-    }
-    .journey-banner-bg {
-      position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=75') center/cover no-repeat;
-      opacity: .18;
-    }
-    /* Silueta de pinos inferior */
-    .journey-trees {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      pointer-events: none;
-    }
-    .journey-trees svg { display: block; width: 100%; }
-    .journey-content { position: relative; z-index: 2; }
-    .journey-banner h2 {
-      font-size: clamp(2.2rem, 6vw, 4.5rem);
-      color: var(--white);
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      margin-bottom: 1.25rem;
-      text-shadow: 0 2px 20px rgba(0,0,0,.3);
-    }
-    .journey-banner p {
-      color: rgba(254,252,246,.65);
-      font-size: .88rem;
-      max-width: 480px;
-      margin: 0 auto 2.5rem;
-      line-height: 2;
-    }
-    .btn-journey {
-      display: inline-flex; align-items: center; gap: .6rem;
-      background: var(--forest); color: var(--white);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
-      padding: 1rem 2.5rem; transition: background .25s;
-    }
-    .btn-journey:hover { background: var(--sky); color: var(--midnight); }
+    /* WA FLOAT */
+    .wa-float{position:fixed;bottom:1.75rem;right:1.75rem;z-index:200;width:3.5rem;height:3.5rem;background:#25d366;display:grid;place-items:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .25s,box-shadow .25s;border-radius:0;}
+    .wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(37,211,102,.55);}
+    .wa-float svg{width:1.6rem;height:1.6rem;fill:#fff;}
+    .wa-tip{position:absolute;right:110%;top:50%;transform:translateY(-50%);background:var(--midnight);color:var(--white);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:.35rem .9rem;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;}
+    .wa-float:hover .wa-tip{opacity:1;}
 
-    /* ── TIPS / BLOG ── */
-    .tips-section { padding: 6rem var(--gap); max-width: 1140px; margin: 0 auto; }
-    .tips-head {
-      display: flex; justify-content: space-between;
-      align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;
-    }
-    .btn-ghost {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
-      border: 1px solid var(--midnight); background: none; color: var(--midnight);
-      padding: .75rem 1.5rem; cursor: pointer; transition: background .2s, color .2s;
-    }
-    .btn-ghost:hover { background: var(--midnight); color: var(--white); }
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2px; background: rgba(94,108,91,.15);
-    }
-    .blog-card { background: var(--white); overflow: hidden; transition: transform .3s; }
-    .blog-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(22,42,44,.08); }
-    .blog-card img { aspect-ratio: 16/9; object-fit: cover; width: 100%; }
-    .blog-body { padding: 1.5rem 1.75rem 2rem; }
-    .blog-cat { font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--forest); margin-bottom: .6rem; }
-    .blog-title { font-size: 1.3rem; color: var(--midnight); margin-bottom: .5rem; }
-    .blog-excerpt { font-size: .82rem; color: var(--storm); }
+    /* FOOTER */
+    footer{background:var(--midnight);color:var(--sky);text-align:center;padding:3rem var(--gap);font-size:10px;letter-spacing:.14em;text-transform:uppercase;}
+    footer .ft-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;letter-spacing:.06em;text-transform:none;color:var(--cream);display:block;margin-bottom:.5rem;}
+    .ft-nav{display:flex;justify-content:center;gap:2rem;margin-top:1.25rem;}
+    .ft-nav a{color:rgba(214,224,226,.45);transition:color .2s;}
+    .ft-nav a:hover{color:var(--sky);}
 
-    /* ── ADMIN ── */
-    .post-form { background: var(--white); padding: 2.5rem; margin-bottom: 2px; display: none; }
-    .post-form.open { display: block; }
-    .post-form h3 { font-size: 1.6rem; margin-bottom: 1.75rem; }
-    .fg { margin-bottom: 1.1rem; }
-    .fg label { display: block; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--storm); margin-bottom: .4rem; }
-    .fg input, .fg textarea, .fg select {
-      width: 100%; padding: .7rem 1rem;
-      border: 1px solid rgba(94,108,91,.3); background: var(--cream);
-      font-family: 'Montserrat', sans-serif; font-size: .85rem; color: var(--midnight);
-      transition: border-color .2s;
-    }
-    .fg input:focus, .fg textarea:focus, .fg select:focus { outline: none; border-color: var(--forest); }
-    .fg textarea { min-height: 90px; resize: vertical; }
-    .form-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem; }
-    .btn-solid {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
-      background: var(--midnight); color: var(--white);
-      border: none; padding: .8rem 1.75rem; cursor: pointer; transition: background .2s;
-    }
-    .btn-solid:hover { background: var(--forest); }
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease;}
+    .reveal.on{opacity:1;transform:translateY(0);}
 
-    /* ── WA FLOAT ── */
-    .wa-float {
-      position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 200;
-      width: 3.25rem; height: 3.25rem; background: #25d366;
-      display: grid; place-items: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,.38);
-      transition: transform .25s, box-shadow .25s;
-    }
-    .wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37,211,102,.5); }
-    .wa-float svg { width: 1.5rem; height: 1.5rem; fill: #fff; }
-    .wa-tip {
-      position: absolute; right: 110%; top: 50%; transform: translateY(-50%);
-      background: var(--midnight); color: var(--white);
-      font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
-      padding: .35rem .9rem; white-space: nowrap;
-      opacity: 0; pointer-events: none; transition: opacity .2s;
-    }
-    .wa-float:hover .wa-tip { opacity: 1; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--midnight); color: var(--sky);
-      text-align: center; padding: 3rem var(--gap);
-      font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
-    }
-    footer .ft-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem; letter-spacing: .06em; text-transform: none;
-      color: var(--cream); display: block; margin-bottom: .5rem;
-    }
-    .ft-nav { display: flex; justify-content: center; gap: 2rem; margin-top: 1.25rem; }
-    .ft-nav a { color: rgba(214,224,226,.45); transition: color .2s; }
-    .ft-nav a:hover { color: var(--sky); }
-
-    /* ── REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s ease, transform .8s ease; }
-    .reveal.on { opacity: 1; transform: translateY(0); }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes heroZoom {
-      from { transform: scale(1.06); }
-      to   { transform: scale(1); }
-    }
-
-    /* ── LOGIN MODAL ── */
-    #loginOverlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(22,42,44,.75); z-index: 500;
-      align-items: center; justify-content: center;
-    }
-    #loginOverlay.open { display: flex; }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes heroZoom{from{transform:scale(1.06);}to{transform:scale(1);}}
   </style>
 </head>
 <body>
@@ -435,24 +154,20 @@
   <div class="nav-logo">Mina Clavero</div>
   <div class="nav-links">
     <a href="#deptos">Departamentos</a>
+    <a href="#comunes">Zonas comunes</a>
     <a href="#ubicacion">Ubicación</a>
-    <a href="#tips">Tips</a>
   </div>
 </nav>
 
-<!-- HERO — imagen de fondo a pantalla completa -->
+<!-- HERO -->
 <header class="hero">
-  <!-- 👉 Guardá tu foto como "hero.jpg" en la misma carpeta y se mostrará aquí -->
   <div class="hero-img"></div>
   <div class="hero-overlay"></div>
-
-  <!-- Silueta de pinos como en la referencia Evertrail -->
   <div class="hero-trees">
     <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,120 L0,80 L30,60 L50,80 L60,50 L80,75 L100,40 L120,70 L140,30 L160,65 L180,20 L200,55 L220,10 L240,50 L260,25 L280,60 L300,35 L320,70 L340,45 L360,80 L380,50 L400,90 L420,55 L440,75 L460,40 L480,65 L500,30 L520,60 L540,45 L560,80 L580,50 L600,90 L620,60 L640,40 L660,70 L680,35 L700,65 L720,25 L740,55 L760,40 L780,70 L800,50 L820,80 L840,45 L860,75 L880,30 L900,60 L920,20 L940,55 L960,35 L980,65 L1000,45 L1020,80 L1040,50 L1060,30 L1080,60 L1100,40 L1120,70 L1140,50 L1160,85 L1180,55 L1200,40 L1220,70 L1240,50 L1260,80 L1280,55 L1300,70 L1320,45 L1340,65 L1360,40 L1380,60 L1400,50 L1440,80 L1440,120 Z" fill="rgba(22,42,44,0.55)"/>
+      <path d="M0,120 L0,80 L30,60 L50,80 L60,50 L80,75 L100,40 L120,70 L140,30 L160,65 L180,20 L200,55 L220,10 L240,50 L260,25 L280,60 L300,35 L320,70 L340,45 L360,80 L380,50 L400,90 L420,55 L440,75 L460,40 L480,65 L500,30 L520,60 L540,45 L560,80 L580,50 L600,90 L620,60 L640,40 L660,70 L680,35 L700,65 L720,25 L740,55 L760,40 L780,70 L800,50 L820,80 L840,45 L860,75 L880,30 L900,60 L920,20 L940,55 L960,35 L980,65 L1000,45 L1020,80 L1040,50 L1060,30 L1080,60 L1100,40 L1120,70 L1140,50 L1160,85 L1180,55 L1200,40 L1220,70 L1240,50 L1260,80 L1280,55 L1300,70 L1320,45 L1340,65 L1360,40 L1380,60 L1400,50 L1440,80 L1440,120 Z" fill="rgba(22,42,44,0.6)"/>
     </svg>
   </div>
-
   <div class="hero-content">
     <div class="hero-eyebrow">Traslasierra · Córdoba</div>
     <h1>Vivir el río,<br/><em>cerca de todo</em></h1>
@@ -463,18 +178,12 @@
       <span class="badge">WiFi · Smart TV</span>
       <span class="badge">Cocina completa</span>
       <span class="badge">Ropa blanca</span>
+      <span class="badge">Parking cubierto</span>
+      <span class="badge">Asador & Patio</span>
     </div>
   </div>
-
   <div class="hero-scroll-hint">Descubrí</div>
 </header>
-
-<!-- Separador wave cream -->
-<div class="wave-sep to-cream" style="background:var(--midnight);">
-  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="height:60px;width:100%;">
-    <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#F4EFE6"/>
-  </svg>
-</div>
 
 <!-- DEPTOS -->
 <section class="section" id="deptos">
@@ -485,15 +194,17 @@
   </div>
 
   <div class="apts-grid">
-    <!-- NÓRDICO -->
+    <!-- OSLO -->
     <div class="apt-card reveal">
       <div class="apt-gallery">
+        <div class="img-loading">Cargando fotos…</div>
         <div class="gallery-slides" id="s-nordic">
-          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=85" alt="Living nórdico"/>
-          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=85" alt="Cocina nórdico"/>
-          <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=900&q=85" alt="Dormitorio nórdico"/>
+          <img src="https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/main-nordic.jpg" alt="Oslo - Vista principal" loading="lazy"/>
+          <img src="https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/kitchen-nordic.jpg" alt="Oslo - Cocina" loading="lazy"/>
+          <img src="https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/closet-nordic.jpg" alt="Oslo - Closet" loading="lazy"/>
+          <img src="https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/bath-nordic.jpg" alt="Oslo - Baño" loading="lazy"/>
         </div>
-        <div class="gallery-count" id="c-nordic">1 / 3</div>
+        <div class="gallery-count" id="c-nordic">1 / 4</div>
         <div class="gallery-nav">
           <button class="gnav-btn" onclick="slide('nordic',-1)">‹</button>
           <button class="gnav-btn" onclick="slide('nordic',1)">›</button>
@@ -501,7 +212,7 @@
       </div>
       <div class="apt-body">
         <div class="apt-style-tag tag-nordic">Diseño Nórdico</div>
-        <h3 class="apt-name">Depto Fjord</h3>
+        <h3 class="apt-name">Depto Oslo</h3>
         <p class="apt-desc">Madera clara, lino natural y luz en abundancia. Un refugio escandinavo en pleno corazón serrano.</p>
         <div class="apt-amenities">
           <span class="pill">Ropa blanca</span>
@@ -510,22 +221,24 @@
           <span class="pill">Smart TV</span>
           <span class="pill">Vajilla</span>
         </div>
-        <a href="https://wa.me/543517559088?text=Hola!%20Me%20interesa%20el%20Depto%20Fjord%20(n%C3%B3rdico)%20en%20Mina%20Clavero%20%F0%9F%8F%94%EF%B8%8F" target="_blank" class="wa-btn">
+        <a href="https://wa.me/543517559088?text=Hola!%20Me%20interesa%20el%20Depto%20Oslo%20(n%C3%B3rdico)%20en%20Mina%20Clavero%20%F0%9F%8F%94%EF%B8%8F%20%C2%BFTienen%20disponibilidad%3F" target="_blank" class="wa-btn">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Consultar este depto
+          Consultar Depto Oslo
         </a>
       </div>
     </div>
 
-    <!-- INDUSTRIAL -->
+    <!-- BERLÍN -->
     <div class="apt-card reveal">
       <div class="apt-gallery">
+        <div class="img-loading">Cargando fotos…</div>
         <div class="gallery-slides" id="s-industrial">
-          <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=900&q=85" alt="Living industrial"/>
-          <img src="https://images.unsplash.com/photo-1556909211-36987daf7b4d?w=900&q=85" alt="Cocina industrial"/>
-          <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=900&q=85" alt="Dormitorio industrial"/>
+          <img src="https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/main-iron.jpg" alt="Berlín - Vista principal" loading="lazy"/>
+          <img src="https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/room-iron.jpg" alt="Berlín - Habitación" loading="lazy"/>
+          <img src="https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/living-iron.jpg" alt="Berlín - Living" loading="lazy"/>
+          <img src="https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/bath-iron.jpg" alt="Berlín - Baño" loading="lazy"/>
         </div>
-        <div class="gallery-count" id="c-industrial">1 / 3</div>
+        <div class="gallery-count" id="c-industrial">1 / 4</div>
         <div class="gallery-nav">
           <button class="gnav-btn" onclick="slide('industrial',-1)">‹</button>
           <button class="gnav-btn" onclick="slide('industrial',1)">›</button>
@@ -533,7 +246,7 @@
       </div>
       <div class="apt-body">
         <div class="apt-style-tag tag-industrial">Diseño Industrial</div>
-        <h3 class="apt-name">Depto Iron</h3>
+        <h3 class="apt-name">Depto Berlín</h3>
         <p class="apt-desc">Hormigón expuesto, acero y negro mate. Estética urbana sin renunciar a la calma del paisaje serrano.</p>
         <div class="apt-amenities">
           <span class="pill">Ropa blanca</span>
@@ -542,152 +255,95 @@
           <span class="pill">Smart TV</span>
           <span class="pill">Vajilla</span>
         </div>
-        <a href="https://wa.me/543517559088?text=Hola!%20Me%20interesa%20el%20Depto%20Iron%20(industrial)%20en%20Mina%20Clavero%20%F0%9F%8F%94%EF%B8%8F" target="_blank" class="wa-btn">
+        <a href="https://wa.me/543517559088?text=Hola!%20Me%20interesa%20el%20Depto%20Berl%C3%ADn%20(industrial)%20en%20Mina%20Clavero%20%F0%9F%8F%94%EF%B8%8F%20%C2%BFTienen%20disponibilidad%3F" target="_blank" class="wa-btn">
           <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Consultar este depto
+          Consultar Depto Berlín
         </a>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="upload-zone reveal">
-    <div class="label" style="color:var(--midnight);margin-bottom:.6rem;">Galería</div>
-    <h3>Cargá tus fotos</h3>
-    <p>Seleccioná las imágenes reales del depto para previsualizarlas aquí.</p>
-    <label for="photoInput" class="upload-label">+ Seleccionar fotos</label>
-    <input type="file" id="photoInput" multiple accept="image/*" onchange="previewPhotos(this)"/>
-    <div class="uploaded-grid" id="uploadedGrid"></div>
+<!-- ZONAS COMUNES -->
+<section class="section" id="comunes" style="padding-top:0;">
+  <div class="section-head reveal">
+    <div class="label">Instalaciones compartidas</div>
+    <h2>Zonas comunes</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="apts-grid">
+    <div class="apt-card reveal">
+      <div class="apt-gallery">
+        <div class="img-loading">Cargando fotos…</div>
+        <div class="gallery-slides" id="s-garage">
+          <img src="https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/garage.jpg" alt="Parking cubierto" loading="lazy"/>
+        </div>
+        <div class="gallery-count" id="c-garage">1 / 1</div>
+      </div>
+      <div class="apt-body">
+        <div class="apt-style-tag" style="color:var(--storm);">Uso compartido</div>
+        <h3 class="apt-name">Parking cubierto</h3>
+        <p class="apt-desc">Cochera techada para que tu auto esté protegido durante toda la estadía.</p>
+        <div class="apt-amenities">
+          <span class="pill">Incluido</span><span class="pill">Techado</span><span class="pill">Seguro</span>
+        </div>
+      </div>
+    </div>
+    <div class="apt-card reveal">
+      <div class="apt-gallery">
+        <div class="img-loading">Cargando fotos…</div>
+        <div class="gallery-slides" id="s-bbq">
+          <img src="https://cdn.jsdelivr.net/gh/Governance-people/mina-clavero-home-stay@main/barbacue.webp" alt="Asador y patio" loading="lazy"/>
+        </div>
+        <div class="gallery-count" id="c-bbq">1 / 1</div>
+      </div>
+      <div class="apt-body">
+        <div class="apt-style-tag" style="color:var(--storm);">Uso compartido</div>
+        <h3 class="apt-name">Asador & Patio</h3>
+        <p class="apt-desc">Espacio al aire libre con parrilla para los asados serranos que no pueden faltar.</p>
+        <div class="apt-amenities">
+          <span class="pill">Incluido</span><span class="pill">Parrilla</span><span class="pill">Al aire libre</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- UBICACIÓN — dark -->
+<!-- UBICACIÓN -->
 <div class="loc-section" id="ubicacion">
   <div class="loc-inner">
     <div>
       <div class="label">Dónde estamos</div>
       <h2>Ubicación<br/>privilegiada</h2>
       <ul class="loc-list">
-        <li class="loc-item reveal">
-          <span class="loc-num">01</span>
-          <div><strong>1 cuadra del río Los Elefantes</strong><span>Playas de río cristalino a pasos. El sonido del agua como fondo.</span></div>
-        </li>
-        <li class="loc-item reveal">
-          <span class="loc-num">02</span>
-          <div><strong>3 cuadras del centro</strong><span>Restaurantes, heladerías y comercios sin necesidad de auto.</span></div>
-        </li>
-        <li class="loc-item reveal">
-          <span class="loc-num">03</span>
-          <div><strong>3 cuadras de la terminal</strong><span>Llegás, dejás las valijas y ya estás en modo vacaciones.</span></div>
-        </li>
-        <li class="loc-item reveal">
-          <span class="loc-num">04</span>
-          <div><strong>Valle de Traslasierra</strong><span>Cerros, cascadas y paisaje serrano de Córdoba al instante.</span></div>
-        </li>
-        <li class="loc-item reveal">
-          <span class="loc-num">05</span>
-          <div><strong>2h de Córdoba Capital</strong><span>Ideal para escapadas de semana y fines de semana largos.</span></div>
-        </li>
+        <li class="loc-item reveal"><span class="loc-num">01</span><div><strong>1 cuadra del río Los Elefantes</strong><span>Playas de río cristalino a pasos. El sonido del agua como fondo.</span></div></li>
+        <li class="loc-item reveal"><span class="loc-num">02</span><div><strong>3 cuadras del centro</strong><span>Restaurantes, heladerías y comercios sin necesidad de auto.</span></div></li>
+        <li class="loc-item reveal"><span class="loc-num">03</span><div><strong>3 cuadras de la terminal</strong><span>Llegás, dejás las valijas y ya estás en modo vacaciones.</span></div></li>
+        <li class="loc-item reveal"><span class="loc-num">04</span><div><strong>Valle de Traslasierra</strong><span>Cerros, cascadas y paisaje serrano de Córdoba al instante.</span></div></li>
+        <li class="loc-item reveal"><span class="loc-num">05</span><div><strong>2h de Córdoba Capital</strong><span>Ideal para escapadas de semana y fines de semana largos.</span></div></li>
       </ul>
     </div>
     <div class="map-frame reveal">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26400!2d-65.0125!3d-31.7004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942c8dfa5a3c4f4d%3A0x7a2c4e8c3d5f6b2a!2sMina%20Clavero%2C%20C%C3%B3rdoba!5e0!3m2!1ses!2sar!4v1680000000000"
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26400!2d-65.0125!3d-31.7004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942c8dfa5a3c4f4d%3A0x7a2c4e8c3d5f6b2a!2sMina%20Clavero%2C%20C%C3%B3rdoba!5e0!3m2!1ses!2sar!4v1680000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </div>
 </div>
 
-<!-- BANNER "START YOUR JOURNEY" (inspirado en la referencia) -->
+<!-- BANNER RESERVA -->
 <div class="journey-banner">
   <div class="journey-banner-bg"></div>
   <div class="journey-trees">
     <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="height:100px;">
-      <path d="M0,100 L0,55 L20,40 L40,60 L60,25 L80,55 L100,15 L120,50 L140,30 L160,60 L180,10 L200,45 L220,5 L240,40 L260,20 L280,55 L300,35 L320,65 L340,40 L360,70 L380,45 L400,80 L420,50 L440,70 L460,35 L480,60 L500,25 L520,55 L540,40 L560,75 L580,45 L600,85 L620,55 L640,35 L660,65 L680,30 L700,60 L720,20 L740,50 L760,35 L780,65 L800,45 L820,75 L840,40 L860,70 L880,25 L900,55 L920,15 L940,50 L960,30 L980,60 L1000,40 L1020,75 L1040,45 L1060,25 L1080,55 L1100,35 L1120,65 L1140,45 L1160,80 L1180,50 L1200,35 L1220,65 L1240,45 L1260,75 L1280,50 L1300,65 L1320,40 L1340,60 L1360,35 L1380,55 L1400,45 L1440,75 L1440,100 Z" fill="rgba(22,42,44,0.8)"/>
+      <path d="M0,100 L0,55 L20,40 L40,60 L60,25 L80,55 L100,15 L120,50 L140,30 L160,60 L180,10 L200,45 L220,5 L240,40 L260,20 L280,55 L300,35 L320,65 L340,40 L360,70 L380,45 L400,80 L420,50 L440,70 L460,35 L480,60 L500,25 L520,55 L540,40 L560,75 L580,45 L600,85 L620,55 L640,35 L660,65 L680,30 L700,60 L720,20 L740,50 L760,35 L780,65 L800,45 L820,75 L840,40 L860,70 L880,25 L900,55 L920,15 L940,50 L960,30 L980,60 L1000,40 L1020,75 L1040,45 L1060,25 L1080,55 L1100,35 L1120,65 L1140,45 L1160,80 L1180,50 L1200,35 L1220,65 L1240,45 L1260,75 L1280,50 L1300,65 L1320,40 L1340,60 L1360,35 L1380,55 L1400,45 L1440,75 L1440,100 Z" fill="rgba(22,42,44,0.85)"/>
     </svg>
   </div>
   <div class="journey-content">
     <h2>Empezá tu escapada</h2>
     <p>El río te espera. Reservá ahora y asegurá tu lugar en el corazón de las sierras cordobesas.</p>
-    <a href="https://wa.me/543517559088?text=Hola!%20Vi%20su%20web%20y%20quiero%20consultar%20sobre%20los%20deptos%20en%20Mina%20Clavero%20%F0%9F%8F%94%EF%B8%8F" target="_blank" class="btn-journey">Reservar por WhatsApp</a>
-  </div>
-</div>
-
-<!-- TIPS -->
-<div class="tips-section" id="tips">
-  <div class="tips-head">
-    <div class="section-head reveal" style="margin-bottom:0">
-      <div class="label">Blog de viaje</div>
-      <h2>Qué hacer en<br/>Traslasierra</h2>
-      <div class="rule"></div>
-    </div>
-    <button class="btn-ghost" id="adminBtn" onclick="showLogin()" title="Admin">⬡</button>
-  </div>
-
-  <!-- LOGIN MODAL -->
-  <div id="loginOverlay">
-    <div style="background:var(--white); padding:2.5rem; max-width:360px; width:90%; position:relative;">
-      <button onclick="closeLogin()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--storm);">✕</button>
-      <div class="label" style="color:var(--midnight);margin-bottom:.5rem;">Panel admin</div>
-      <h3 style="font-size:1.6rem;margin-bottom:1.5rem;">Acceso privado</h3>
-      <div class="fg">
-        <label>Contraseña</label>
-        <input type="password" id="pwInput" placeholder="••••••••••" onkeydown="if(event.key==='Enter')checkPw()"/>
-      </div>
-      <div id="pwError" style="font-size:.8rem;color:#c0392b;margin-bottom:.75rem;display:none;">Contraseña incorrecta.</div>
-      <div class="form-actions">
-        <button class="btn-solid" onclick="checkPw()">Ingresar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- PANEL ADMIN -->
-  <div id="adminPanel" style="display:none;">
-    <div style="background:var(--forest);color:var(--white);padding:.6rem 1.25rem;font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;">
-      <span>✦ Modo administrador activo</span>
-      <button onclick="logout()" style="background:none;border:1px solid rgba(255,255,255,.4);color:var(--white);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .8rem;cursor:pointer;">Cerrar sesión</button>
-    </div>
-    <div class="post-form open" id="postForm">
-      <h3>Nuevo artículo</h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-        <div class="fg"><label>Título</label><input type="text" id="postTitle" placeholder="Ej: Las mejores cascadas"/></div>
-        <div class="fg">
-          <label>Categoría</label>
-          <select id="postCat">
-            <option>Naturaleza</option><option>Gastronomía</option><option>Aventura</option>
-            <option>Cultura</option><option>Relax</option><option>Tips prácticos</option>
-          </select>
-        </div>
-      </div>
-      <div class="fg"><label>Descripción</label><textarea id="postExcerpt" placeholder="Contá brevemente el tip..."></textarea></div>
-      <div class="fg"><label>URL de imagen (opcional)</label><input type="url" id="postImg" placeholder="https://..."/></div>
-      <div class="form-actions">
-        <button class="btn-solid" onclick="addPost()">✦ Publicar artículo</button>
-      </div>
-    </div>
-    <div id="savedPostsList" style="background:var(--white);padding:1.5rem 2rem;margin-top:2px;display:none;">
-      <div class="label" style="color:var(--midnight);margin-bottom:1rem;">Artículos guardados</div>
-      <div id="savedPostsItems"></div>
-    </div>
-  </div>
-
-  <div class="blog-grid" id="blogGrid" style="margin-top:2rem;">
-    <div class="blog-card reveal">
-      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80" alt="Cascadas"/>
-      <div class="blog-body"><div class="blog-cat">Naturaleza</div><h3 class="blog-title">Las cascadas imperdibles de la zona</h3><p class="blog-excerpt">Desde el Salto de la Olla hasta Las Gemelas, hay cascadas para todos los niveles.</p></div>
-    </div>
-    <div class="blog-card reveal">
-      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=700&q=80" alt="Gastronomía"/>
-      <div class="blog-body"><div class="blog-cat">Gastronomía</div><h3 class="blog-title">Dónde comer bien en Mina Clavero</h3><p class="blog-excerpt">Parrillas con vista al río, almacenes de campo y heladerías artesanales.</p></div>
-    </div>
-    <div class="blog-card reveal">
-      <img src="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=700&q=80" alt="Trekking"/>
-      <div class="blog-body"><div class="blog-cat">Aventura</div><h3 class="blog-title">Trekking por los cerros de Córdoba</h3><p class="blog-excerpt">Senderos con vistas panorámicas únicas del Valle de Traslasierra.</p></div>
-    </div>
-    <div class="blog-card reveal">
-      <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=700&q=80" alt="Río"/>
-      <div class="blog-body"><div class="blog-cat">Relax</div><h3 class="blog-title">El río Los Elefantes: pozones y playas</h3><p class="blog-excerpt">Agua cristalina en verano. Los mejores spots a metros de los deptos.</p></div>
-    </div>
+    <a href="https://wa.me/543517559088?text=Hola!%20Vi%20su%20web%20y%20quiero%20consultar%20sobre%20los%20deptos%20en%20Mina%20Clavero%20%F0%9F%8F%94%EF%B8%8F%20%C2%BFTienen%20disponibilidad%3F" target="_blank" class="btn-journey">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Reservar por WhatsApp
+    </a>
   </div>
 </div>
 
@@ -697,8 +353,8 @@
   A 1 cuadra del río &nbsp;·&nbsp; Traslasierra, Córdoba, Argentina
   <div class="ft-nav">
     <a href="#deptos">Departamentos</a>
+    <a href="#comunes">Zonas comunes</a>
     <a href="#ubicacion">Ubicación</a>
-    <a href="#tips">Tips</a>
   </div>
 </footer>
 
@@ -709,14 +365,12 @@
 </a>
 
 <script>
-  /* ── NAV scroll ── */
+  /* NAV */
   const nav = document.getElementById('mainNav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
 
-  /* ── GALERÍA ── */
-  const st = { nordic: 0, industrial: 0 };
+  /* GALERÍA */
+  const st = { nordic:0, industrial:0, garage:0, bbq:0 };
   function slide(id, d) {
     const s = document.getElementById('s-' + id);
     const n = s.children.length;
@@ -725,111 +379,9 @@
     document.getElementById('c-' + id).textContent = `${st[id] + 1} / ${n}`;
   }
 
-  /* ── FOTOS UPLOAD ── */
-  function previewPhotos(inp) {
-    const grid = document.getElementById('uploadedGrid');
-    [...inp.files].forEach(f => {
-      const r = new FileReader();
-      r.onload = e => { const i = document.createElement('img'); i.src = e.target.result; grid.appendChild(i); };
-      r.readAsDataURL(f);
-    });
-  }
-
-  /* ── ADMIN ── */
-  const REAL_PW = 'BjornKronk24';
-  let isAdmin = false;
-
-  function showLogin() {
-    document.getElementById('loginOverlay').classList.add('open');
-    setTimeout(() => document.getElementById('pwInput').focus(), 100);
-  }
-  function closeLogin() {
-    document.getElementById('loginOverlay').classList.remove('open');
-    document.getElementById('pwInput').value = '';
-    document.getElementById('pwError').style.display = 'none';
-  }
-  function checkPw() {
-    if (document.getElementById('pwInput').value === REAL_PW) {
-      isAdmin = true; closeLogin();
-      document.getElementById('adminPanel').style.display = 'block';
-      renderSavedList();
-    } else {
-      document.getElementById('pwError').style.display = 'block';
-      document.getElementById('pwInput').value = '';
-      document.getElementById('pwInput').focus();
-    }
-  }
-  function logout() {
-    isAdmin = false;
-    document.getElementById('adminPanel').style.display = 'none';
-  }
-
-  const FB_IMG = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=80';
-  const STORAGE_KEY = 'mc_posts';
-  function getPosts() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; } }
-  function savePosts(p) { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
-
-  function buildCard(post, id) {
-    const div = document.createElement('div');
-    div.className = 'blog-card'; div.dataset.postId = id;
-    div.innerHTML = `<img src="${post.img || FB_IMG}" alt="${post.title}" onerror="this.src='${FB_IMG}'"/>
-      <div class="blog-body">
-        <div class="blog-cat">${post.cat}</div>
-        <h3 class="blog-title">${post.title}</h3>
-        <p class="blog-excerpt">${post.excerpt}</p>
-      </div>`;
-    return div;
-  }
-
-  function addPost() {
-    const title = document.getElementById('postTitle').value.trim();
-    const excerpt = document.getElementById('postExcerpt').value.trim();
-    const cat = document.getElementById('postCat').value;
-    const img = document.getElementById('postImg').value.trim();
-    if (!title || !excerpt) { alert('Completá título y descripción.'); return; }
-    const posts = getPosts();
-    posts.unshift({ title, excerpt, cat, img, date: new Date().toISOString() });
-    savePosts(posts);
-    document.getElementById('blogGrid').prepend(buildCard(posts[0], 0));
-    ['postTitle', 'postExcerpt', 'postImg'].forEach(id => document.getElementById(id).value = '');
-    renderSavedList();
-  }
-
-  function renderSavedList() {
-    const posts = getPosts();
-    const wrapper = document.getElementById('savedPostsList');
-    const container = document.getElementById('savedPostsItems');
-    if (!posts.length) { wrapper.style.display = 'none'; return; }
-    wrapper.style.display = 'block'; container.innerHTML = '';
-    posts.forEach((p, i) => {
-      const row = document.createElement('div');
-      row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid rgba(94,108,91,.15);font-size:.85rem;gap:1rem;';
-      row.innerHTML = `<div><strong style="font-family:'Cormorant Garamond',serif;font-size:1rem;">${p.title}</strong> <span style="font-size:.75rem;color:var(--storm);margin-left:.75rem;">${p.cat}</span></div>
-        <button onclick="deletePost(${i})" style="background:none;border:1px solid rgba(192,57,43,.4);color:#c0392b;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .75rem;cursor:pointer;">Eliminar</button>`;
-      container.appendChild(row);
-    });
-  }
-
-  function deletePost(i) {
-    if (!confirm('¿Eliminar este artículo?')) return;
-    const posts = getPosts(); posts.splice(i, 1); savePosts(posts);
-    loadSavedPosts(); renderSavedList();
-  }
-
-  function loadSavedPosts() {
-    const grid = document.getElementById('blogGrid');
-    grid.querySelectorAll('[data-post-id]').forEach(el => el.remove());
-    [...getPosts()].reverse().forEach((p, i) => grid.insertBefore(buildCard(p, i), grid.firstChild));
-  }
-
-  /* ── REVEAL ── */
-  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }), { threshold: .1 });
+  /* REVEAL */
+  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); }), { threshold:.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-  /* ── INIT ── */
-  window.addEventListener('DOMContentLoaded', () => {
-    loadSavedPosts();
-  });
 </script>
 </body>
 </html>
